@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: postgresql-jbpm-route
+  # namespace: student01-namespace
+  labels:
+    app: postgresql-jbpm
+spec:
+  host: postgresql-jbpm-route-student01-namespace.apps.j4fxfomh.eastus.aroapp.io
+  to:
+    kind: Service
+    name: postgresql-jbpm
+  port:
+    targetPort: 5432
+  tls:
+    termination: passthrough

@@ -1,0 +1,12 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+name: postgresql-external
+spec:
+to:
+kind: Service
+name: postgresql
+port:
+targetPort: 5432
+tls:
+termination: passthrough

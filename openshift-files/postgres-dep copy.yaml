@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "10"
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"postgresql:16.1-alpine3.19"},"fieldPath":"spec.template.spec.containers[?(@.name==\"postgresql\")].image"}]'
+  generation: 13
+  labels:
+    app: postgresql
+    app.kubernetes.io/component: postgresql
+    app.kubernetes.io/instance: postgresql
+  name: postgresql
+  # namespace: keycloak
+  resourceVersion: "47629609"
+  uid: ea44a119-75f5-4ef4-88f8-2864b3adc13f
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      deployment: postgresql
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        openshift.openshift.io/restartedAt: "2024-09-13T15:36:41.547Z"
+      creationTimestamp: null
+      labels:
+        deployment: postgresql
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_DATABASE
+          value: keycloak
+        - name: POSTGRES_PASSWORD
+          value: keycloak
+        - name: POSTGRES_USER
+          value: keycloak
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata/data
+        image: postgres@sha256:c32324cb8177cca81c5fc275bcb9845049452bd15515208805e83c4271999f05
+        imagePullPolicy: IfNotPresent
+        name: postgresql
+        ports:
+        - containerPort: 5432
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data/pgdata
+          name: postgresql-storage
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: postgresql-storage
+        persistentVolumeClaim:
+          claimName: postgresql-pvc
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-09-13T12:04:29Z"
+    lastUpdateTime: "2024-09-13T12:04:29Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2024-09-13T15:32:12Z"
+    lastUpdateTime: "2024-09-13T15:39:04Z"
+    message: ReplicaSet "postgresql-8445c4ff99" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 13
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

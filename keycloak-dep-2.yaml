@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"2","openshift.io/generated-by":"OpenShiftNewApp"},"creationTimestamp":"2024-09-13T02:33:44Z","generation":7,"labels":{"app":"keycloak","app.kubernetes.io/component":"keycloak","app.kubernetes.io/instance":"keycloak"},"name":"keycloak","namespace":"keycloak","resourceVersion":"47631782","uid":"ebd77595-3a96-48e6-927d-32729323c4b3"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"deployment":"keycloak"}},"strategy":{"rollingUpdate":{"maxSurge":"25%","maxUnavailable":"25%"},"type":"RollingUpdate"},"template":{"metadata":{"annotations":{"openshift.io/generated-by":"OpenShiftNewApp"},"creationTimestamp":null,"labels":{"deployment":"keycloak"}},"spec":{"containers":[{"env":[{"name":"DB_ADDR","value":"postgresql"},{"name":"DB_DATABASE","value":"keycloak"},{"name":"DB_PASSWORD","value":"keycloak"},{"name":"DB_USER","value":"keycloak"},{"name":"DB_VENDOR","value":"postgres"},{"name":"KEYCLOAK_PASSWORD","value":"admin"},{"name":"KEYCLOAK_USER","value":"admin"},{"name":"PROXY_ADDRESS_FORWARDING","value":"true"}],"image":"quay.io/keycloak/keycloak:legacy","imagePullPolicy":"IfNotPresent","name":"keycloak","ports":[{"containerPort":8443,"protocol":"TCP"},{"containerPort":8080,"protocol":"TCP"}],"resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/opt/jboss/keycloak/standalone/data","name":"keycloak-storage"}]}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"volumes":[{"emptyDir":{},"name":"keycloak-storage"}]}}},"status":{"availableReplicas":1,"conditions":[{"lastTransitionTime":"2024-09-13T15:32:21Z","lastUpdateTime":"2024-09-13T15:32:22Z","message":"ReplicaSet \"keycloak-5b6c55794b\" has successfully progressed.","reason":"NewReplicaSetAvailable","status":"True","type":"Progressing"},{"lastTransitionTime":"2024-09-13T15:44:40Z","lastUpdateTime":"2024-09-13T15:44:40Z","message":"Deployment has minimum availability.","reason":"MinimumReplicasAvailable","status":"True","type":"Available"}],"observedGeneration":7,"readyReplicas":1,"replicas":1,"updatedReplicas":1}}
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: "2024-09-23T18:42:44Z"
+  generation: 1
+  labels:
+    app: keycloak
+    app.kubernetes.io/component: keycloak
+    app.kubernetes.io/instance: keycloak
+  name: keycloak
+  namespace: keycloak
+  resourceVersion: "318466"
+  uid: 2a271630-ce62-443a-9b3e-7fa3faf19394
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      deployment: keycloak
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+      creationTimestamp: null
+      labels:
+        deployment: keycloak
+    spec:
+      containers:
+      - env:
+        - name: DB_ADDR
+          value: postgresql-jbpm
+        - name: DB_DATABASE
+          value: keycloak
+        - name: DB_PASSWORD
+          value: keycloak
+        - name: DB_USER
+          value: keycloak
+        - name: DB_VENDOR
+          value: postgres
+        - name: KEYCLOAK_PASSWORD
+          value: admin
+        - name: KEYCLOAK_USER
+          value: admin
+        - name: PROXY_ADDRESS_FORWARDING
+          value: "true"
+        image: quay.io/keycloak/keycloak:legacy
+        imagePullPolicy: IfNotPresent
+        name: keycloak
+        ports:
+        - containerPort: 8443
+          protocol: TCP
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opt/jboss/keycloak/standalone/data
+          name: keycloak-storage
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir: {}
+        name: keycloak-storage
+status:
+  conditions:
+  - lastTransitionTime: "2024-09-23T18:42:44Z"
+    lastUpdateTime: "2024-09-23T18:43:01Z"
+    message: ReplicaSet "keycloak-7cbc9db8c8" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-09-23T19:18:01Z"
+    lastUpdateTime: "2024-09-23T19:18:01Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1

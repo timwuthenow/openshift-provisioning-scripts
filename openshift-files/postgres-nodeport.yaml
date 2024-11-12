@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql-jbpm-nodeport
+  # namespace: keycloak
+  labels:
+    app: postgresql-jbpm
+spec:
+  type: NodePort
+  ports:
+  - port: 5432
+    targetPort: 5432
+  selector:
+    deployment: postgresql

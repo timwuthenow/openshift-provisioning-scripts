@@ -1,0 +1,35 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  creationTimestamp: "2024-09-23T19:26:47Z"
+  labels:
+    app: keycloak
+    app.kubernetes.io/component: keycloak
+    app.kubernetes.io/instance: keycloak
+  name: keycloak
+  namespace: keycloak
+  resourceVersion: "323705"
+  uid: 8146660f-7a9e-4540-af15-84c92087fe5e
+spec:
+  # host: keycloak-keycloak.apps.tzrosa-8bc90xwq.pzcn.p1.openshiftapps.com
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: keycloak
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - lastTransitionTime: "2024-09-23T19:26:47Z"
+      status: "True"
+      type: Admitted
+    host: keycloak-keycloak.apps.tzrosa-8bc90xwq.pzcn.p1.openshiftapps.com
+    routerCanonicalHostname: router-default.apps.tzrosa-8bc90xwq.pzcn.p1.openshiftapps.com
+    routerName: default
+    wildcardPolicy: None
